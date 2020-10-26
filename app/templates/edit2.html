@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <h1>Courses</h1>
+            <form class="form form-horizontal" method="post" role="form">
+                {{ form.hidden_tag() }}
+                {{ wtf.form_errors(form, hiddens="only") }}
+
+                {{ wtf.form_field(form.code, placeholder="e.g. CSC236") }}
+                {{ wtf.form_field(form.lec_link) }}
+                {{ wtf.form_field(form.lec_passcode, placeholder="e.g. 123456") }}
+                {{ wtf.form_field(form.tut_link) }}
+                {{ wtf.form_field(form.tut_passcode, placeholder="e.g. 123456") }}
+                {{ wtf.form_field(form.pra_link) }}
+                {{ wtf.form_field(form.pra_passcode, placeholder="e.g. 123456") }}
+                {{ wtf.form_field(form.lec_code, placeholder="e.g. 0101") }}
+                {{ wtf.form_field(form.tut_code, placeholder="e.g. 0101") }}
+                {{ wtf.form_field(form.pra_code, placeholder="e.g. 0101") }}
+
+                {{ wtf.form_field(form.submit) }}
+
+            </form>
+        </div>
+    </div>
+{% endblock %}

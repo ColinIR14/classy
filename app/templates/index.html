@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+    <h1 style="text-align:center">Welcome!</h1>
+
+    <script
+            type="text/javascript"
+            src="/static/register_service_worker.js">
+    </script>
+    <script type="text/javascript">
+        registerServiceWorker(
+            "/static/service_worker.js",
+            "{{config['VAPID_PUBLIC_KEY']}}",
+            "/api/push-subscriptions"
+        );
+    </script>
+
+
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Course</th>
+                <th scope="col">Lecture</th>
+                <th scope="col">Tutorial</th>
+                <th scope="col">Practical</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for course in courses %}
+            <tr>
+                <th scope="row">{{ course[0] }} <br>
+                <a href="{{ url_for('delete_course', course_code=course[0].code.upper()) }}">Delete</a></th>
+                <td>{% if course[1].lec_link %}
+                        <a href=course[1].lec_link>Link</a>
+                    {% if course[1].lec_pass %}
+                        Pass: {{ course[1].lec_pass }}
+                    {% endif %}
+                    <br>
+                {% endif %}
+                {% if course[1].time1 %}
+                    Mon {{ course[1].time1 }}:00
+                {% endif %}
+                {% if course[1].time2 %}
+                    <br>Tues {{ course[1].time2 }}:00
+                {% endif %}
+                {% if course[1].time3 %}
+                    <br>Wed {{ course[1].time3 }}:00
+                {% endif %}
+                {% if course[1].time4 %}
+                    <br>Thurs{{ course[1].time4 }}:00
+                {% endif %}
+                {% if course[1].time5 %}
+                    <br>Fri {{ course[1].time5 }}:00
+                {% endif %}
+                </td>
+                <td>
+                {% if course[2] %}
+                    {% if course[2].tut_link %}
+                        <a href=course[2].tut_link>Link</a>
+                        {% if course[2].tut_pass %}
+                            Pass: {{ course[2].tut_pass }}
+                        {% endif %}
+                        <br>
+                    {% endif %}
+                    {% if course[2].day1 %}
+                        {{ course[2].day1.capitalize() }}
+                        {{ course[2].time1 }}:00
+                    {% endif %}
+                    {% if course[2].day2 %}
+                        {{ course[2].day2.capitalize() }}
+                        {{ course[2].time2 }}:00
+                    {% endif %}
+                {% endif %}
+                </td>
+                <td>
+                {% if course[3] %}
+                    {% if course[3].pra_link %}
+                        <a href=course[3].pra_link>Link</a>
+                        {% if course[3].pra_pass %}
+                            Pass: {{ course[3].pra_pass }}
+                        {% endif %}
+                        <br>
+                    {% endif %}
+                    {% if course[3].day1 %}
+                        {{ course[3].day1 }}
+                        {{ course[3].time1 }}
+                    {% endif %}
+                {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    {% for course in courses %}
+        {% if course.lec_link %}
+            <a class="btn btn-outline-primary btn-lg" href="{{ "//" + course.lec_link }}">{{ course.code }}</a>
+        {% endif %}
+    {% endfor %}
+
+    <a class="btn btn-primary btn-lg" href="{{ url_for('add_course') }}">Add course</a>
+    <a href = "{{ url_for('add_class') }}">Manually Input Class Times</a>
+    </div>
+{% endblock %}
+
+
+
+

@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+    <div class="container">
+    <h1 align="center">Add a Course</h1>
+    <form class="form" method="post" role="form">
+        <span class="border"></span>
+        <div class="form-row justify-content-center">
+            {{ form.hidden_tag() }}
+            {{ wtf.form_errors(form, hiddens="only") }}
+            <div class="form-group col-md-6">
+                {{ wtf.form_field(form.code) }}
+                {{ wtf.form_field(form.tut_link) }}
+            </div>
+
+            <div class="form-group col-md-6">
+                {{ wtf.form_field(form.lec_link) }}
+                {{ wtf.form_field(form.pra_link) }}
+            </div>
+        </div>
+        <h2>Lectures</h2>
+        <div class="form-row justify-content-center">
+
+            <div class="form-group col-md-4">
+
+
+                {{ wtf.form_field(form.lec1_day) }}
+                {{ wtf.form_field(form.lec2_day) }}
+                {{ wtf.form_field(form.lec3_day) }}
+
+
+
+            </div>
+            <div class="form-group col-md-4">
+
+
+                {{ wtf.form_field(form.lec1_start) }}
+                {{ wtf.form_field(form.lec2_start) }}
+                {{ wtf.form_field(form.lec3_start) }}
+
+            </div>
+            <div class="form-group col-md-4">
+                {{ wtf.form_field(form.lec1_ampm) }}
+                {{ wtf.form_field(form.lec2_ampm) }}
+                {{ wtf.form_field(form.lec3_ampm) }}
+            </div>
+        </div>
+        <h2>Tutorials</h2>
+        <div class="form-row justify-content-center">
+            <div class="col-md-4">
+
+                {{ wtf.form_field(form.tut_day) }}
+            </div>
+        </div>
+        <div class="form-row justify-content-center">
+            <div class="col-md-4">
+                {{ wtf.form_field(form.tut_start) }}
+
+
+            </div>
+
+            <div class="col-md-4">
+                {{ wtf.form_field(form.tut_ampm) }}
+            </div>
+        </div>
+        <h2>Practicals</h2>
+        <div class="form-row justify-content-center">
+            <div class="col-md-4">
+
+                {{ wtf.form_field(form.pra_day) }}
+
+            </div>
+        </div>
+        <div class="form-row justify-content-center">
+            <div class="col-md-4">
+
+                {{ wtf.form_field(form.pra_start) }}
+
+            </div>
+
+            <div class="col-md-4">
+                {{ wtf.form_field(form.pra_ampm) }}
+            </div>
+
+        </div>
+        <div class="form-row justify-content-center">
+            <div class="col-md-12">
+            {{ wtf.form_field(form.submit) }}
+            </div>
+        </div>
+    </form>
+    </div>
+{% endblock %}
